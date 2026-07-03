@@ -223,30 +223,34 @@
         <p>© 2026 BCBP Singapore. Music Ministry</p>
     </footer>
 
-    <!-- Real-Time Countdown Script to August 22 -->
+<!-- Main Hero Countdown Script (Targeting August 22, 2026) -->
     <script>
-        const currentYear = new Date().getFullYear();
-        const countdownTarget = new Date(`August 22, ${currentYear} 00:00:00`).getTime();
+        const heroTargetDate = new Date('August 22, 2026 00:00:00').getTime();
 
-        const updateCountdown = setInterval(() => {
-            const now = new Date().getTime();
-            const distance = countdownTarget - now;
+        const runHeroTimer = setInterval(() => {
+            const timeNow = new Date().getTime();
+            const difference = heroTargetDate - timeNow;
 
-            if (distance < 0) {
-                clearInterval(updateCountdown);
-                document.getElementById('countdown-days').innerText = "00";
-                document.getElementById('countdown-hours').innerText = "00";
-                document.getElementById('countdown-minutes').innerText = "00";
+            // If the countdown is reached
+            if (difference < 0) {
+                clearInterval(runHeroTimer);
+                document.getElementById('hero-days').innerText = "00";
+                document.getElementById('hero-hours').innerText = "00";
+                document.getElementById('hero-minutes').innerText = "00";
                 return;
             }
 
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            // Calculations for Days, Hours, and Minutes
+            const d = Math.floor(difference / (1000 * 60 * 60 * 24));
+            const h = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
 
-            document.getElementById('countdown-days').innerText = String(days).padStart(2, '0');
-            document.getElementById('countdown-hours').innerText = String(hours).padStart(2, '0');
-            document.getElementById('countdown-minutes').innerText = String(minutes).padStart(2, '0');
+            // Injecting live values into the correct Hero IDs
+            if(document.getElementById('hero-days')) {
+                document.getElementById('hero-days').innerText = String(d).padStart(2, '0');
+                document.getElementById('hero-hours').innerText = String(h).padStart(2, '0');
+                document.getElementById('hero-minutes').innerText = String(m).padStart(2, '0');
+            }
         }, 1000);
     </script>
 
